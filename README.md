@@ -1,9 +1,9 @@
 <center>
-<img src="attio.svg" alt="Attio Logo" height="64">
+<img src="attio.svg" alt="Attio Logo" height="48" align=center>
 </center>
-<h1 style="text-align: center;">Attio MCP Server</h1>
+<h1 align=center>Attio MCP Server</h1>
 
-<p style="text-align: center; font-style: italic;">This project provides a <a href="https://gofastmcp.com">FastMCP</a> server with tools to interact with the Attio API. It allows you to manage resources within your Attio workspace.</p>
+<p align=center>This project provides a <a href="https://gofastmcp.com">FastMCP</a> server with tools to interact with the Attio API. It allows you to manage resources within your Attio workspace.</p>
 
 ---
 

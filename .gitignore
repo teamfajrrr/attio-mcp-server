@@ -1,0 +1,82 @@
+.env
+__pycache__
+*/**/__pycache__
+
+# Python bytecode and compiled files
+*.py[cod]
+*.so
+
+# Distribution / packaging
+.Python
+build/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a CI script
+#  퍄if you do build PyInstaller bundles locally, they will be ignored
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+.mypy_cache/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Vim
+*.sw[op]
+
+# VS Code
+.vscode/
+
+# General
+*.log
+*.db
+*.sqlite3
+*.sqlite
+
+# OS generated files
+.DS_Store
+Thumbs.db
