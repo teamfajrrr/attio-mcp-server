@@ -1,11 +1,7 @@
-<center>
-<img src="attio.svg" alt="Attio Logo" height="48" align=center>
-</center>
+<p align=center><img src="attio.svg" alt="Attio Logo" height="48"></p>
 <h1 align=center>Attio MCP Server</h1>
 
 <p align=center>This project provides a <a href="https://gofastmcp.com">FastMCP</a> server with tools to interact with the Attio API. It allows you to manage resources within your Attio workspace.</p>
-
----
 
 ## Setup
 
