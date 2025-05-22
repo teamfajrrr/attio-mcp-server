@@ -5,7 +5,7 @@
 
 ## Setup
 
-1. **Clone the repository (if applicable):**
+1. **Clone the repository:**
 
    ```bash
    git clone <repository-url>
@@ -23,7 +23,7 @@
    pip install -r requirements.txt
    ```
 4. **Configure environment variables:**
-   Create a `.env` file in the project root directory (`attio-mcp/`) with the following content:
+   Create a `.env` file in the project root directory with the following content:
 
    ```env
    BASE_URL=https://api.attio.com
