@@ -268,7 +268,7 @@ async def list_records(
     object_id_or_slug: str,
     filter_criteria: Optional[Dict[str, Any]] = None,
     sorts: Optional[List[Dict[str, Any]]] = None,
-    limit: int = 500,
+    limit: int = 10,
     offset: int = 0
 ) -> Dict[str, Any]:
     """
@@ -277,10 +277,18 @@ async def list_records(
     Args:
         object_id_or_slug: The ID or slug of the Attio object to query records from.
         filter_criteria: A dictionary defining the filter for the query.
-                         Example: {"and": [{"attribute": "name", "condition": "eq", "value": "Test Company"}]}
+                        Example with name: {
+                            "name": "Ada Lovelace"
+                        }
+                        Example with email:
+                        {
+                            "email_addresses": {
+                                "email_address": "test@example.com"
+                            }
+                        }
         sorts: A list of dictionaries defining the sort order.
                Example: [{"attribute": "created_at", "direction": "desc"}]
-        limit: The maximum number of records to return (default 500).
+        limit: The maximum number of records to return (default 10).
         offset: The number of records to skip (for pagination, default 0).
 
     Returns:

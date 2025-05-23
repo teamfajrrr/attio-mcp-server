@@ -130,7 +130,7 @@ async def list_entries(
                [{"attribute": "name", "direction": "asc"}]
                Example for a custom attribute (replace with actual attribute ID):
                [{"attribute_id": "custom_attribute_id_for_sorting", "direction": "asc"}]
-        limit: The maximum number of entries to return. Defaults to 500.
+        limit: The maximum number of entries to return. Defaults to 10.
         offset: The number of entries to skip before starting to collect the result set. Defaults to 0.
 
     Returns:
