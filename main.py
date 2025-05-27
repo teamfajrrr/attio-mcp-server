@@ -1,5 +1,4 @@
 from fastmcp import FastMCP
-
 # Import tools from submodules
 from entries import tools as entry_tools
 from records import tools as record_tools
@@ -11,7 +10,6 @@ from notes import tools as note_tools
 from tasks import tools as task_tools
 from loguru import logger
 
-
 # Create a server instance
 mcp = FastMCP(
     name="AttioMCP", 
@@ -19,6 +17,26 @@ mcp = FastMCP(
         This server provides tools to interact with Attio's API.
     """
 )
+
+# Add a health check endpoint for Railway
+@mcp.get("/")
+async def health_check():
+    """Health check endpoint for Railway and other monitoring services"""
+    return {
+        "status": "healthy",
+        "service": "AttioMCP",
+        "message": "Attio MCP Server is running",
+        "endpoints": {
+            "sse": "/sse",
+            "health": "/"
+        }
+    }
+
+# Add an additional health endpoint
+@mcp.get("/health")
+async def health():
+    """Alternative health check endpoint"""
+    return {"status": "ok", "service": "AttioMCP"}
 
 # List entry
 mcp.tool()(entry_tools.create_list_entry)
