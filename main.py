@@ -4,28 +4,39 @@ from loguru import logger
 from typing import Optional, List, Dict, Any
 
 # Import all tool modules
-from attributes.tools import (
-    list_attributes, create_attribute, get_attribute, update_attribute,
-    list_select_options, create_select_option, update_select_option,
-    list_statuses, create_status, update_status
-)
-from entries.tools import (
-    create_list_entry, get_list_entry, list_entries,
-    update_list_entry_overwrite, update_list_entry_append,
-    delete_list_entry, get_list_entry_attribute_values
-)
-from lists.tools import list_lists, create_list, get_list, update_list
-from notes.tools import list_notes, create_note, get_note, delete_note
-from objects.tools import list_objects, create_object, get_object, update_object
-from records.tools import (
-    get_record, update_record_overwrite, update_record_append,
-    delete_record, list_record_entries, list_records, create_record
-)
-from tasks.tools import list_tasks, create_task, get_task, update_task, delete_task
-from workspace_members.tools import list_workspace_members, get_workspace_member
+try:
+    from attributes.tools import (
+        list_attributes, create_attribute, get_attribute, update_attribute,
+        list_select_options, create_select_option, update_select_option,
+        list_statuses, create_status, update_status
+    )
+    from entries.tools import (
+        create_list_entry, get_list_entry, list_entries,
+        update_list_entry_overwrite, update_list_entry_append,
+        delete_list_entry, get_list_entry_attribute_values
+    )
+    from lists.tools import list_lists, create_list, get_list, update_list
+    from notes.tools import list_notes, create_note, get_note, delete_note
+    from objects.tools import list_objects, create_object, get_object, update_object
+    from records.tools import (
+        get_record, update_record_overwrite, update_record_append,
+        delete_record, list_record_entries, list_records, create_record
+    )
+    from tasks.tools import list_tasks, create_task, get_task, update_task, delete_task
+    from workspace_members.tools import list_workspace_members, get_workspace_member
+    logger.info("Successfully imported all tool modules")
+except ImportError as e:
+    logger.error(f"Failed to import modules: {e}")
+    raise
 
 # Initialize FastMCP
 mcp = FastMCP(name="AttioMCP")
+
+# Health check endpoint
+@mcp.tool()
+async def health_check() -> Dict[str, Any]:
+    """Simple health check tool to verify server is working."""
+    return {"status": "healthy", "message": "AttioMCP server is running"}
 
 # ============= ATTRIBUTE TOOLS =============
 
@@ -487,17 +498,23 @@ async def attio_get_workspace_member(
 # ============= SERVER STARTUP =============
 
 if __name__ == "__main__":
-    from config import PORT, TRANSPORT
+    # Railway provides PORT environment variable
+    port = int(os.environ.get("PORT", 8080))
+    transport = os.environ.get("TRANSPORT", "sse")
     
-    logger.info(f"Starting Attio MCP Server on port {PORT} with transport {TRANSPORT}")
+    logger.info(f"Starting Attio MCP Server on port {port} with transport {transport}")
     logger.info("Attio MCP Server with comprehensive API tools registered")
     
-    if TRANSPORT == "sse":
-        mcp.run(transport="sse", host="0.0.0.0", port=PORT)
-    elif TRANSPORT == "stdio":
-        mcp.run(transport="stdio")
-    elif TRANSPORT == "streamable-http":
-        mcp.run(transport="streamable-http", host="0.0.0.0", port=PORT)
-    else:
-        logger.warning(f"Unknown transport {TRANSPORT}, defaulting to SSE")
-        mcp.run(transport="sse", host="0.0.0.0", port=PORT)
+    try:
+        if transport == "sse":
+            mcp.run(transport="sse", host="0.0.0.0", port=port)
+        elif transport == "stdio":
+            mcp.run(transport="stdio")
+        elif transport == "streamable-http":
+            mcp.run(transport="streamable-http", host="0.0.0.0", port=port)
+        else:
+            logger.warning(f"Unknown transport {transport}, defaulting to SSE")
+            mcp.run(transport="sse", host="0.0.0.0", port=port)
+    except Exception as e:
+        logger.error(f"Failed to start server: {e}")
+        raise
