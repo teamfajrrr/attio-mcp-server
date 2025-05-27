@@ -18,26 +18,6 @@ mcp = FastMCP(
     """
 )
 
-# Add a health check endpoint for Railway
-@mcp.get("/")
-async def health_check():
-    """Health check endpoint for Railway and other monitoring services"""
-    return {
-        "status": "healthy",
-        "service": "AttioMCP",
-        "message": "Attio MCP Server is running",
-        "endpoints": {
-            "sse": "/sse",
-            "health": "/"
-        }
-    }
-
-# Add an additional health endpoint
-@mcp.get("/health")
-async def health():
-    """Alternative health check endpoint"""
-    return {"status": "ok", "service": "AttioMCP"}
-
 # List entry
 mcp.tool()(entry_tools.create_list_entry)
 mcp.tool()(entry_tools.get_list_entry)
