@@ -1,4 +1,7 @@
-fastmcp
+fastmcp[cli]
 httpx
 python-dotenv
 loguru
+uvicorn[standard]
+starlette
+anyio
