@@ -490,7 +490,7 @@ if __name__ == "__main__":
     from config import PORT, TRANSPORT
     
     logger.info(f"Starting Attio MCP Server on port {PORT} with transport {TRANSPORT}")
-    logger.info(f"Available tools: {len(mcp._tools)} tools registered")
+    logger.info("Attio MCP Server with comprehensive API tools registered")
     
     if TRANSPORT == "sse":
         mcp.run(transport="sse", host="0.0.0.0", port=PORT)
