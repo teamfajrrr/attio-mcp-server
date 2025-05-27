@@ -5,3 +5,5 @@ loguru
 uvicorn[standard]
 starlette
 anyio
+fastapi
+pydantic
